@@ -128,47 +128,17 @@ Lightbox.prototype = {
 
 
         var objBody = $$('body')[0];
-
-		objBody.appendChild(Builder.node('div',{id:'overlay'}));
-	
-        objBody.appendChild(Builder.node('div',{id:'lightbox'}, [
-            Builder.node('div',{id:'outerImageContainer'}, 
-                Builder.node('div',{id:'imageContainer'}, [
-                    Builder.node('img',{id:'lightboxImage'}), 
-                    Builder.node('div',{id:'hoverNav'}, [
-                        Builder.node('a',{id:'prevLink', href: '#' }),
-                        Builder.node('a',{id:'nextLink', href: '#' })
-                    ]),
-                    Builder.node('div',{id:'loading'}, 
-                        Builder.node('a',{id:'loadingLink', href: '#' }, 
-                            Builder.node('img', {src: LightboxOptions.fileLoadingImage})
-                        )
-                    )
-                ])
-            ),
-            Builder.node('div', {id:'imageDataContainer'},
-                Builder.node('div',{id:'imageData'}, [
-                    Builder.node('div',{id:'imageDetails'}, [
-                        Builder.node('span',{id:'caption'}),
-                        Builder.node('span',{id:'numberDisplay'})
-                    ]),
-                    Builder.node('div',{id:'bottomNav'},
-                        Builder.node('a',{id:'bottomNavClose', href: '#' },
-                            Builder.node('img', { src: LightboxOptions.fileBottomNavCloseImage })
-                        )
-                    )
-                ])
-            )
-        ]));
+				
+				objBody.insert('<div id="overlay"></div><div id="lightbox"><div id="outerImageContainer"><div id="imageContainer"><img id="lightboxImage"><div style="" id="hoverNav"><a href="#" id="prevLink"></a><a href="#" id="nextLink"></a></div><div id="loading"><a href="#" id="loadingLink"><img src="'+LightboxOptions.fileLoadingImage+'"></a></div></div></div><div id="imageDataContainer"><div id="imageData"><div id="imageDetails"><span id="caption"></span><span id="numberDisplay"></span></div><div id="bottomNav"><a href="#" id="bottomNavClose"><img src="'+LightboxOptions.fileBottomNavCloseImage+'"></a></div></div></div></div>');
 
 
-		$('overlay').hide().observe('click', (function() { this.end(); }).bind(this));
-		$('lightbox').hide().observe('click', (function(event) { if (event.element().id == 'lightbox') this.end(); }).bind(this));
-		$('outerImageContainer').setStyle({ width: size, height: size });
-		$('prevLink').observe('click', (function(event) { event.stop(); this.changeImage(this.activeImage - 1); }).bindAsEventListener(this));
-		$('nextLink').observe('click', (function(event) { event.stop(); this.changeImage(this.activeImage + 1); }).bindAsEventListener(this));
-		$('loadingLink').observe('click', (function(event) { event.stop(); this.end(); }).bind(this));
-		$('bottomNavClose').observe('click', (function(event) { event.stop(); this.end(); }).bind(this));
+				$('overlay').hide().observe('click', (function() { this.end(); }).bind(this));
+				$('lightbox').hide().observe('click', (function(event) { if (event.element().id == 'lightbox') this.end(); }).bind(this));
+				$('outerImageContainer').setStyle({ width: size, height: size });
+				$('prevLink').observe('click', (function(event) { event.stop(); this.changeImage(this.activeImage - 1); }).bindAsEventListener(this));
+				$('nextLink').observe('click', (function(event) { event.stop(); this.changeImage(this.activeImage + 1); }).bindAsEventListener(this));
+				$('loadingLink').observe('click', (function(event) { event.stop(); this.end(); }).bind(this));
+				$('bottomNavClose').observe('click', (function(event) { event.stop(); this.end(); }).bind(this));
 
         var th = this;
         (function(){
